@@ -1,0 +1,488 @@
+
+
+
+
+  /*HOME PAGE*/
+
+video {
+    object-fit:cover;
+    width:100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-bottom: 0;
+
+    
+    }
+    
+    .video-container {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: inset 0 0 0 100px rgba(0, 0, 0.2)
+      object-fit contain;
+    }
+
+    .video-container > h1{
+        color: white;
+        font-size: 100px;
+        margin-top: -100px;
+
+    }
+
+    .video-container > h2{
+      color: white;
+      font-size: 50px;
+      margin-top: 0;
+
+  }
+
+
+    .video-container > p {
+        color: white;
+        margin-top: 8px;
+        font-size: 37px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode' 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    @media screen and (max-width: 960px) {
+        .video-container > h1 {
+            font-size: 70px;
+            margin-top: -150px;
+        }
+    }
+    @media screen and (max-width: 760px) {
+        .video-container > h1 {
+            font-size: 50px;
+            margin-top: 100px;
+            .video-container > p {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .Rest {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      
+    }
+
+    .Rest a{
+      text-align: center;
+      padding: 10px;
+      font-size: large;
+      font-weight: bold;
+      background: orangered;
+    }
+
+
+
+    .rooms{
+        /*padding: 8vw 8vw 0 8vw;*/
+        text-align: center;
+        color: rgb(44, 44, 80);
+        margin-top: none;
+      
+      }
+    
+      .rooms h1{
+        margin-top: 0;
+        font-size: 40px;
+        text-align: left;
+    
+      }
+
+      .rooms p{
+        text-align: left;
+        font-size: 20px;
+    
+      }
+
+      .rooms .room-box{
+        display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-gap: 1rem;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      text-align: right;
+      }
+    
+      
+        
+      .room-box .room h6{
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: large;
+      }
+    
+      .room-box  .room {
+        text-align: start;
+        background: white;
+        height: 100%;
+      }
+    
+      .room-box .room img {
+        width: 100%;
+        height: 80%;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 0;
+        border-radius: 10px; 
+      }
+    
+      .rooms .room:hover{
+        transition: transform 0.3s;
+        transform: scale(1.05);
+        box-shadow: 2px 2px 10px rgba(0, 0,0, 0.15);
+        cursor: pointer;
+      }
+
+      .rooms .room button:hover{
+        transition: transform 0.3s;
+        transform: scale(1.05);
+        box-shadow: 2px 2px 10px rgba(0, 0,0, 0.15);
+        cursor: pointer;
+        display: block;
+        filter: drop-shadow(0 0 10px #fffdef);
+      }
+
+      .rooms .room button {
+        font-size: large;
+        background: blue;
+        color: white;
+        border-radius: 15px;
+        outline: none;
+        border: none;
+        padding: 10px 12px;
+
+
+
+      }
+
+
+      .rooms .room i{
+        color: orange;
+        font-size: .9rem;
+      }
+
+      .course1 {
+        text-align: right;
+      }
+      .course1 h2{
+        text-align: center;
+        color: orangered;
+        font-size: 30px;
+        margin-bottom: 0;
+        margin-top: 0;
+
+      }
+
+      
+
+      .course1 i {
+        margin-right: 20px;
+        color: blue;
+        font-size: x-large;
+       
+      }
+
+
+      .course1 button {
+        margin-right: 10px;
+        margin-bottom: 15px;
+        outline: none;
+        border: none;
+        padding: 20px 25px;
+        background-color: blue;
+        color: white;
+      }
+      
+      
+      
+
+      .course2 {
+        text-align: right;
+        
+      }
+
+      .course2 button {
+        margin-right: 10px;
+        margin-bottom: 15px;
+        outline: none;
+        border: none;
+        padding: 20px 25px;
+        color: blue;
+
+      }
+
+      .course2 button i{
+        margin-right: 10px;
+       
+      }
+      
+      
+     
+    
+    
+    
+    .r-head {
+        margin-bottom: 2rem;
+    }
+
+
+    .icons{
+      display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    
+    
+    }
+
+
+    .icons .icon button {
+      margin-right: 10px;
+      margin-bottom: 15px;
+      outline: none;
+      border: none;
+      padding: 20px 25px;
+      color: black;
+      margin-left: 40px;
+
+    }
+
+    .icons .icon button i{
+      margin-right: 10px;
+     
+    }
+
+    .hero-container {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .hero-left {
+      text-align: left;
+      margin-left: 100px;
+    }
+    
+    .hero-right {
+      text-align: right;
+      margin-right: 100px;
+    }
+    
+    
+    .image-container {
+      max-width: 100%; 
+      
+      height: auto;
+      width: 30rem;
+      height: 35rem;
+      overflow: hidden;
+      border-radius: 15rem 15rem 0 0;
+      border: 8px solid rgba(255, 255, 255, o.12);
+      align-items: right;
+    }
+
+    .hero-left .first-span{
+      font-size: larger;
+      color: orangered;
+      font-weight: bold;
+    }
+
+    .hero-left .second-span{
+      font-size: 30px;
+      color: blue;
+      font-weight: bold;
+    }
+
+    .c-container{
+      width: 100%;
+      justify-content: left;
+      align-items: left;
+      margin-bottom: 0;
+
+    }
+
+    .c-container .contactInfo{
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+
+    .c-container .contactInfo .box{
+      position: static;
+      padding: 20px 0;
+      display: flex;
+    }
+
+    .c-container .contactInfo .box .icon{
+      min-width: 60px;
+      height: 60px;
+      background: #fff;
+      color: blue;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      font-size: 22px;
+      margin-top: 22px;
+      margin-right: 0;
+    }
+
+    .c-container .contactInfo .box .text{
+      
+      margin-left: 20px;
+      font-size: 16px;
+      flex-direction: column;
+      font-weight: 300;
+    }
+
+    .centerForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    
+    .centerForm form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 5px;
+    }
+    
+    .centerForm h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .centertForm .inputBox {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .centerForm .inputBox input,
+    .centerForm .inputBox textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: none;
+    }
+    
+    .centerForm .inputBox input:focus,
+    .centerForm .inputBox textarea:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 2px #007bff;
+    }
+    
+    .centerForm .inputBox span {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
+      color: #666;
+      background-color: #fff;
+      padding: 0 5px;
+      transition: 0.3s;
+    }
+    
+    .centerForm .inputBox input:focus ~ span,
+    .centerForm .inputBox textarea:focus ~ span {
+      top: -10px;
+      left: 10px;
+      font-size: 12px;
+      color: #007bff;
+      background-color: #fff;
+      padding: 0 5px;
+    }
+    
+    .centerForm .inputBox input[type="submit"] {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .centerForm .inputBox input[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+    .footer {
+      width: 100%;
+      padding: 2rem 0;
+      background-color: rgb(212, 230, 230);
+    }
+
+    .footer .container-f {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1.2rem;
+
+    }
+
+    .footer .col{
+      margin: auto;
+    }
+    .footer h3 {
+      margin: .8rem 0;
+    }
+
+    .footer p {
+      margin: .4rem 0;;
+    }
+
+    .footer .social {
+      text-align: center;
+    }
+
+    .footer i{
+      font-size: 2rem;
+      margin: 2rem 3rem;
+      color: #5651e5;
+    }
