@@ -351,90 +351,61 @@ video {
       font-weight: 300;
     }
 
+    
     .centerForm {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 50px;
+      max-width: 400px; /* adjust the width to your liking */
+      margin: 40px auto; /* center the form horizontally */
+      padding: 20px;
+      background-color: #f9f9f9; /* light gray background */
+      border: 1px solid #ddd; /* light gray border */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
     }
-    
-    .centerForm form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 30px;
-      border-radius: 5px;
-    }
-    
-    .centerForm h2 {
-      font-size: 24px;
+
+    h2 {
+      font-size: 50px;
       font-weight: bold;
       margin-bottom: 30px;
       text-align: center;
+      color: orangered;
     }
     
-    .centertForm .inputBox {
-      position: relative;
-      margin-bottom: 20px;
+    /* Style the input boxes */
+    .inputBox {
+      margin-bottom: 20px; /* add some space between input boxes */
     }
     
-    .centerForm .inputBox input,
-    .centerForm .inputBox textarea {
-      width: 100%;
+    .inputBox input[type="text"],.inputBox textarea {
+      width: 100%; /* make the input fields full-width */
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
       font-size: 16px;
-      resize: none;
+      border: 1px solid #ccc; /* light gray border */
     }
     
-    .centerForm .inputBox input:focus,
-    .centerForm .inputBox textarea:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 2px #007bff;
+    .inputBox input[type="text"]:focus,.inputBox textarea:focus {
+      border-color: #aaa; /* darker gray border on focus */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* subtle shadow on focus */
     }
     
-    .centerForm .inputBox span {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    .inputBox span {
       font-size: 14px;
-      color: #666;
-      background-color: #fff;
-      padding: 0 5px;
-      transition: 0.3s;
+      color: #666; /* dark gray text */
+      display: block;
+      margin-top: 5px; /* add some space between input field and label */
     }
     
-    .centerForm .inputBox input:focus ~ span,
-    .centerForm .inputBox textarea:focus ~ span {
-      top: -10px;
-      left: 10px;
-      font-size: 12px;
-      color: #007bff;
-      background-color: #fff;
-      padding: 0 5px;
-    }
-    
-    .centerForm .inputBox input[type="submit"] {
-      margin-top: 20px;
+    /* Style the submit button */
+    .inputBox input[type="submit"] {
+      background-color: blue; /* green background */
+      color: #fff; /* white text */
       padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: 0.3s;
     }
     
-    .centerForm .inputBox input[type="submit"]:hover {
-      background-color: #0069d9;
+    .inputBox input[type="submit"]:hover {
+      background-color: #61b1fc; /* darker green background on hover */
     }
-
-
-
 
 
 

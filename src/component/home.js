@@ -292,7 +292,7 @@ export default function() {
          </div>
        </div>
       
-       <div classNamee="centerForm">
+       <div classNamee='centerForm'>
         <form>
           <h2>Send A Message</h2>
           <div className="inputBox">
@@ -316,7 +316,7 @@ export default function() {
 
     <div className="hero-right">
       <div className="image-container">
-        <img src="./glass.jpg" alt="" />
+        <img src="./nice.png" alt="" />
       </div>
     </div>
   </div>
