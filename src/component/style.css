@@ -353,12 +353,12 @@ video {
 
     
     .centerForm {
-      max-width: 400px; /* adjust the width to your liking */
-      margin: 40px auto; /* center the form horizontally */
+      max-width: 400px;
+      margin: 40px auto;
       padding: 20px;
-      background-color: #f9f9f9; /* light gray background */
-      border: 1px solid #ddd; /* light gray border */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+      background-color: #f9f9f9; 
+      border: 1px solid #ddd; 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
     }
 
     h2 {
@@ -369,34 +369,33 @@ video {
       color: orangered;
     }
     
-    /* Style the input boxes */
+    
     .inputBox {
-      margin-bottom: 20px; /* add some space between input boxes */
+      margin-bottom: 20px; 
     }
     
     .inputBox input[type="text"],.inputBox textarea {
-      width: 100%; /* make the input fields full-width */
+      width: 100%; 
       padding: 10px;
       font-size: 16px;
-      border: 1px solid #ccc; /* light gray border */
+      border: 1px solid #ccc;
     }
     
     .inputBox input[type="text"]:focus,.inputBox textarea:focus {
-      border-color: #aaa; /* darker gray border on focus */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* subtle shadow on focus */
-    }
+      border-color: #aaa; 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
     
     .inputBox span {
       font-size: 14px;
-      color: #666; /* dark gray text */
+      color: #666; 
       display: block;
-      margin-top: 5px; /* add some space between input field and label */
+      margin-top: 5px; 
     }
     
-    /* Style the submit button */
+    
     .inputBox input[type="submit"] {
-      background-color: blue; /* green background */
-      color: #fff; /* white text */
+      background-color: blue; 
+      color: #fff;
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
@@ -404,7 +403,7 @@ video {
     }
     
     .inputBox input[type="submit"]:hover {
-      background-color: #61b1fc; /* darker green background on hover */
+      background-color: #61b1fc; 
     }
 
 
