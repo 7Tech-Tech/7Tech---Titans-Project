@@ -113,7 +113,7 @@ video {
 
       .rooms .room-box{
         display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
       grid-gap: 1rem;
       margin-top: 20px;
       margin-bottom: 50px;
@@ -131,12 +131,92 @@ video {
       .room-box  .room {
         text-align: start;
         background: white;
-        height: 100%;
+        height: 80%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        
       }
+
+      /* Like Button */
+      .room-box  .room .lk{
+        display: flex;
+         gap: 10px;
+         margin-top: 8px;
+         margin-bottom: 8px;
+         align-items: center;
+         margin-left: 8px;
+      }
+     
+     
+      .room-box  .room .lk .like-button {
+       background-color: #4CAF50;
+      color: white;
+      margin-left: 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+      }
+
+.room-box  .room .lk .like-button:hover {
+  background-color: #45a049;
+}
+
+/* Dislike Button */
+.room-box  .room .lk .dislike-button {
+  background-color: #f44336;
+  color: white;
+  font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-box  .room .lk .dislike-button:hover {
+  background-color: #da190b;
+}
+
+/* Buy Button */
+.room-box  .room .lk .buy-button {
+  background-color: #008CBA;
+  color: white;
+  font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-box  .room .lk .buy-button:hover {
+  background-color: #007bb5;
+}
+
+/* Rent Button */
+.room-box  .room .lk .rent-button {
+  background-color: #FF9800;
+  color: white;
+  font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-box  .room .lk .rent-button:hover {
+  background-color: #fb8c00;
+}
+
+.room-box  .room .lk .agent{
+  background-color: #6eb2f1;
+  color: white;
+  font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
     
       .room-box .room img {
         width: 100%;
-        height: 80%;
+        height: 90%;
         background-size: cover;
         background-position: center;
         margin-bottom: 0;
@@ -159,16 +239,13 @@ video {
         filter: drop-shadow(0 0 10px #fffdef);
       }
 
-      .rooms .room button {
+      .rooms .room .details {
         font-size: large;
         background: blue;
         color: white;
         border-radius: 15px;
         outline: none;
         border: none;
-        padding: 10px 12px;
-
-
 
       }
 
@@ -404,6 +481,14 @@ video {
     .inputBox input[type="submit"]:hover {
       background-color: #61b1fc; 
     }
+
+
+
+
+
+    
+    
+    
 
 
 

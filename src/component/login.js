@@ -93,8 +93,8 @@ export default function LoginForm() {
     if (userType === 'student') {
       return (
         <div>
-          <h1>Welcome Student!</h1>
-          {/* Your student dashboard or page */}
+          <h1>User!</h1>
+          {/* Your User dashboard or page */}
         </div>
       );
     } else if (userType === 'staff') {
