@@ -630,7 +630,7 @@ video {
     
     .social i{
       font-size: 2rem;
-      margin: 2rem 1rem;
+      
       color: #5651e5;
     }
 
@@ -640,7 +640,18 @@ video {
     }
 
 
-    
+     input[type="radio"] {
+      margin-right: 5px;
+  }
+  
+   .radio-group {
+      display: flex;
+      align-items: center;
+  }
+  
+   .radio-group label {
+      margin-right: 20px;
+  }
 
 
     
@@ -670,6 +681,128 @@ video {
       text-align: left;
       margin-top: 150px;
     }
+
+
+
+    /*SignIn*/
+
+    .form-left2 {
+      text-align: left;
+      margin-left: 200px;
+      width: 750px;
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, .2);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+      color: white;
+      border-radius: 10px;
+      padding: 30px 40px;
+      position: initial;
+    }
+
+    .form-left2 h1{
+      font-size: 36px;
+      text-align: center;
+    }
+
+    .form-left2 .inputss-box{
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-left2 .inputss-field {
+      position: relative;
+      width: 48%;
+      margin: 13px 0;
+    }
+
+    .form-left2 .inputss-box .inputss-field input {
+      width: 100%;
+      height: 60px;
+      background: transparent;
+      border: none;
+      outline: none;
+      border: 2px solid rgba(255, 255, 255, .2);
+      border-radius: 40px;
+      font-size: 16px;
+      color: white;
+      padding: 15px 15px 15px 40px;
+    }
+
+    .form-left2 .inputss-box .inputss-field input::placeholder{
+      color: white;
+    }
+
+    .form-left2 .inputss-box .inputss-field i {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 15px;
+      
+    }
+
+
+    .form-left2 label{
+      display: inline-block;
+      font-size: 14.5px;
+    }
+
+    .form-left2 label input {
+      accent-color: white;
+    }
+
+
+
+
+    .form-left2 .btn{
+      width: 100%;
+      height: 45px;
+      background-color: rgb(105, 105, 105);
+      border: none;
+      border-radius: 40px;
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .form-left2 .btn:hover{
+      color: white;
+      background-color:rgb(197, 192, 192);;
+    }
+
+
+    .form-left2 .register-link {
+      text-align: center;
+    }
+
+    .form-left2 .register-link a {
+      color: #fff;
+    }
+
+    .form-left2 .register-link a:hover{
+      
+    color:rgb(197, 192, 192);;
+    }
+    
+
+
+
+
+    @media (max-width: 576px) {
+      .form-left2 .inputss-field {
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+
+
+
+
+
 
    
 
