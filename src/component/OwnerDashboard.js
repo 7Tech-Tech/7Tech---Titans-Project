@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 export default function OwnerDashboard({ onBuildingAdd }) {
   const [buildingPicture, setBuildingPicture] = useState(null);
   const [price, setPrice] = useState('');
@@ -20,24 +19,32 @@ export default function OwnerDashboard({ onBuildingAdd }) {
     setBuildingPicture(URL.createObjectURL(event.target.files[0]));
   };
 
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value);
-  };
-
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'price') {
+      setPrice(value);
+    } else if (name === 'location') {
+      setLocation(value);
+    } else {
+      setNewAgent({ ...newAgent, [name]: value });
+    }
   };
 
   const handleAgentChange = (event) => {
     setSelectedAgent(event.target.value);
   };
 
+  const resetAgentForm = () => {
+    setSelectedAgent('');
+    setNewAgent({ name: '', email: '', phone: '', address: '' });
+  };
+
   const handleDeleteAgent = () => {
     if (selectedAgent) {
       const updatedAgents = agents.filter(agent => agent.name !== selectedAgent);
       setAgents(updatedAgents);
-      setSelectedAgent('');
-      setNewAgent({ name: '', email: '', phone: '', address: '' });
+      resetAgentForm();
+      alert('Agent deleted successfully!');
     }
   };
 
@@ -45,14 +52,9 @@ export default function OwnerDashboard({ onBuildingAdd }) {
     if (newAgent.name.trim() !== '' && !agents.some(agent => agent.name === newAgent.name.trim())) {
       const updatedAgents = [...agents, { ...newAgent, name: newAgent.name.trim() }];
       setAgents(updatedAgents);
-      setNewAgent({ name: '', email: '', phone: '', address: '' });
-      setSelectedAgent(newAgent.name.trim());
+      resetAgentForm();
+      alert('Agent added successfully!');
     }
-  };
-
-  const handleAgentDetailChange = (event) => {
-    const { name, value } = event.target;
-    setNewAgent({ ...newAgent, [name]: value });
   };
 
   const handleBuildingSubmit = (event) => {
@@ -82,6 +84,7 @@ export default function OwnerDashboard({ onBuildingAdd }) {
       const updatedBuildings = buildings.filter(building => building.id !== selectedBuilding);
       setBuildings(updatedBuildings);
       setSelectedBuilding('');
+      alert('Building deleted successfully!');
     }
   };
 
@@ -92,7 +95,7 @@ export default function OwnerDashboard({ onBuildingAdd }) {
       <form className="agent-form" onSubmit={(e) => e.preventDefault()}>
         <div className="form-section">
           <label htmlFor="agent">Select Agent</label>
-          <select id="agent" value={selectedAgent} onChange={handleAgentChange}>
+          <select id="agent" value={selectedAgent} onChange={handleAgentChange} aria-label="Select Agent">
             <option value="" disabled>Select an agent</option>
             {agents.map(agent => (
               <option key={agent.name} value={agent.name}>{agent.name}</option>
@@ -101,7 +104,7 @@ export default function OwnerDashboard({ onBuildingAdd }) {
         </div>
 
         <div className="form-section">
-          <button type="button" onClick={handleDeleteAgent} disabled={!selectedAgent}>
+          <button type="button" onClick={handleDeleteAgent} disabled={!selectedAgent} aria-label="Delete Selected Agent">
             Delete Selected Agent
           </button>
         </div>
@@ -113,7 +116,8 @@ export default function OwnerDashboard({ onBuildingAdd }) {
             id="newAgentName"
             name="name"
             value={newAgent.name}
-            onChange={handleAgentDetailChange}
+            onChange={handleInputChange}
+            aria-label="Agent Name"
           />
         </div>
 
@@ -124,7 +128,8 @@ export default function OwnerDashboard({ onBuildingAdd }) {
             id="newAgentEmail"
             name="email"
             value={newAgent.email}
-            onChange={handleAgentDetailChange}
+            onChange={handleInputChange}
+            aria-label="Agent Email"
           />
         </div>
 
@@ -135,7 +140,8 @@ export default function OwnerDashboard({ onBuildingAdd }) {
             id="newAgentPhone"
             name="phone"
             value={newAgent.phone}
-            onChange={handleAgentDetailChange}
+            onChange={handleInputChange}
+            aria-label="Agent Phone"
           />
         </div>
 
@@ -146,38 +152,39 @@ export default function OwnerDashboard({ onBuildingAdd }) {
             id="newAgentAddress"
             name="address"
             value={newAgent.address}
-            onChange={handleAgentDetailChange}
+            onChange={handleInputChange}
+            aria-label="Agent Address"
           />
         </div>
 
         <div className="form-section">
-          <button type="button" onClick={handleAddAgent}>Add Agent</button>
+          <button type="button" onClick={handleAddAgent} aria-label="Add Agent">Add Agent</button>
         </div>
       </form>
 
       <form className="building-form" onSubmit={handleBuildingSubmit}>
         <div className="form-section">
           <label htmlFor="buildingPicture">Building Picture</label>
-          <input type="file" id="buildingPicture" accept="image/*" onChange={handlePictureChange} />
+          <input type="file" id="buildingPicture" accept="image/*" onChange={handlePictureChange} aria-label="Building Picture" />
           {buildingPicture && <img src={buildingPicture} alt="Building" className="building-picture" />}
         </div>
 
         <div className="form-section">
           <label htmlFor="price">Price</label>
-          <input type="text" id="price" value={price} onChange={handlePriceChange} />
+          <input type="text" id="price" name="price" value={price} onChange={handleInputChange} aria-label="Price" />
         </div>
 
         <div className="form-section">
           <label htmlFor="location">Location</label>
-          <input type="text" id="location" value={location} onChange={handleLocationChange} />
+          <input type="text" id="location" name="location" value={location} onChange={handleInputChange} aria-label="Location" />
         </div>
 
-        <button type="submit">Save Building Details</button>
+        <button type="submit" aria-label="Save Building Details">Save Building Details</button>
       </form>
 
       <div className="form-section">
         <label htmlFor="buildings">Select Building</label>
-        <select id="buildings" value={selectedBuilding} onChange={handleBuildingSelect}>
+        <select id="buildings" value={selectedBuilding} onChange={handleBuildingSelect} aria-label="Select Building">
           <option value="" disabled>Select a building</option>
           {buildings.map(building => (
             <option key={building.id} value={building.id}>
@@ -185,7 +192,7 @@ export default function OwnerDashboard({ onBuildingAdd }) {
             </option>
           ))}
         </select>
-        <button type="button" onClick={handleDeleteBuilding} disabled={!selectedBuilding}>
+        <button type="button" onClick={handleDeleteBuilding} disabled={!selectedBuilding} aria-label="Delete Selected Building">
           Delete Selected Building
         </button>
       </div>

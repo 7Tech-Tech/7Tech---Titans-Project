@@ -1,23 +1,8 @@
 import React, { useState } from 'react';
 
 export default function App() {
-  const [likes, setLikes] = useState({
-    room1: 0,
-    room2: 0,
-    room3: 0,
-    // Add other rooms as needed
-  });
-
-  const [dislikes, setDislikes] = useState({
-    room1: 0,
-    room2: 0,
-    room3: 0,
-    // Add other rooms as needed
-  });
-
-  const [agents, setAgents] = useState(['Agent 1', 'Agent 2', 'Agent 3']);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [agentInfoVisible, setAgentInfoVisible] = useState(false); // State for AgentInfo visibility
+  const [agentInfoVisible, setAgentInfoVisible] = useState(false);
   const [rooms, setRooms] = useState([
     { id: 'room1', image: './image1.jpg', likes: 0, dislikes: 0 },
     { id: 'room2', image: './image2.jpg', likes: 0, dislikes: 0 },
@@ -25,68 +10,45 @@ export default function App() {
     // Add other rooms as needed
   ]);
 
+  const [agents, setAgents] = useState([
+    { name: 'Agent 1', email: '', phone: '', address: '' },
+    { name: 'Agent 2', email: '', phone: '', address: '' },
+    { name: 'Agent 3', email: '', phone: '', address: '' }
+  ]);
   const [newBuilding, setNewBuilding] = useState({ picture: '', price: '', location: '' });
   const [newAgent, setNewAgent] = useState({ name: '', email: '', phone: '', address: '' });
 
-  const handleLike = (room) => {
-    setLikes((prevLikes) => ({...prevLikes, [room]: prevLikes[room] + 1 }));
+  const handleLike = (roomId) => {
+    setRooms(rooms.map(room => 
+      room.id === roomId ? { ...room, likes: room.likes + 1 } : room
+    ));
   };
 
-  const handleDislike = (room) => {
-    setDislikes((prevDislikes) => ({...prevDislikes, [room]: prevDislikes[room] + 1 }));
+  const handleDislike = (roomId) => {
+    setRooms(rooms.map(room => 
+      room.id === roomId ? { ...room, dislikes: room.dislikes + 1 } : room
+    ));
   };
 
-  const handleRent = (room) => {
+  const handleRent = () => {
     if (!isLoggedIn) {
       alert('Please log in first');
       return;
     }
-    // Redirect to payment page
     window.location.href = './component/payment';
   };
 
-  const handleBuy = (room) => {
+  const handleBuy = () => {
     if (!isLoggedIn) {
       alert('Please log in first');
       return;
     }
-    // Redirect to payment page
     window.location.href = './component/payment';
   };
 
   const handleAgentInfo = () => {
-    // Toggle visibility of AgentInfo section
     setAgentInfoVisible(!agentInfoVisible);
   };
-
-  const handleBuildingAdd = () => {
-    // Update rooms state to include the new building
-    const newRoom = {
-      id: `room${rooms.length + 1}`, // Generate unique id
-      image: newBuilding.picture,
-      likes: 0,
-      dislikes: 0,
-    };
-    setRooms([...rooms, newRoom]);
-    setNewBuilding({ picture: '', price: '', location: '' }); // Reset newBuilding state
-  };
-
-  const handleAgentAdd = () => {
-    // Update agents state to include the new agent
-    setAgents([...agents, newAgent.name]);
-    setNewAgent({ name: '', email: '', phone: '', address: '' }); // Reset newAgent state
-  };
-
-  const handleBuildingChange = (event) => {
-    const { name, value } = event.target;
-    setNewBuilding({...newBuilding, [name]: value });
-  };
-
-  const handleAgentChange = (event) => {
-    const { name, value } = event.target;
-    setNewAgent({...newAgent, [name]: value });
-  };
-
 
   return (
     <>
@@ -118,12 +80,12 @@ export default function App() {
 
         <div className="room-box">
           {rooms.map(room => (
-            <div className="room" key={room.id}>
+            <div className={`room ${room.id === 'room1' ? 'big-room' : ''}`} key={room.id}>
               <img src={room.image} alt={`Room ${room.id}`} />
               <h6>Virtual tour of {room.id}</h6>
               <div className="lk">
-                <button className="like-button" onClick={() => handleLike(room.id)}>👍 Like ({likes[room.id]})</button>
-                <button className="dislike-button" onClick={() => handleDislike(room.id)}>👎 Dislike ({dislikes[room.id]})</button>
+                <button className="like-button" onClick={() => handleLike(room.id)}>👍 Like ({room.likes})</button>
+                <button className="dislike-button" onClick={() => handleDislike(room.id)}>👎 Dislike ({room.dislikes})</button>
                 <button className="buy-button" onClick={() => handleBuy(room.id)}>🏡 Buy</button>
                 <button className="rent-button" onClick={() => handleRent(room.id)}>🏡 Rent</button>
                 <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
@@ -236,7 +198,7 @@ export default function App() {
         </section>
       )}
 
-<div className="footer">
+      <div className="footer">
         <div className="social">
           <i className="fa-brands fa-facebook"></i>
           <i className="fa-brands fa-square-instagram"></i>
@@ -270,9 +232,6 @@ export default function App() {
           </div>
         </div>
       </div>
-
-
-
     </>
   );
 }
