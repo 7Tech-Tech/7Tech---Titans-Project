@@ -4,7 +4,7 @@ import React from 'react';
 import Home from "./component/home";
 import Login from "./component/login";
 import SignUp from "./component/signup";
-import UserAccount from "./component/user_account";
+import OwnerDashboard from "./component/OwnerDashboard";
 import About from "./component/about";
 
 import "./component/login.css";
@@ -30,8 +30,8 @@ import Navbar from "./component/Navbar";
       case "/signup":
       component = <SignUp />
       break;
-      case "/user_account":
-      component = <UserAccount />
+      case "/OwnerDashboard":
+      component = <OwnerDashboard />
       break;
      
       case "/about":

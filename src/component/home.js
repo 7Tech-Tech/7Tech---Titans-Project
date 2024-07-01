@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OwnerDashboard from './OwnerDashboard'; // Import OwnerDashboard component
 
 export default function App() {
   const [likes, setLikes] = useState({
@@ -15,8 +16,15 @@ export default function App() {
     // Add other rooms as needed
   });
 
+  const [agents, setAgents] = useState(['Agent 1', 'Agent 2', 'Agent 3']);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [agentInfoVisible, setAgentInfoVisible] = useState(false); // State for AgentInfo visibility
+  const [rooms, setRooms] = useState([
+    { id: 'room1', image: './image1.jpg', likes: 0, dislikes: 0 },
+    { id: 'room2', image: './image2.jpg', likes: 0, dislikes: 0 },
+    { id: 'room3', image: './image3.jpg', likes: 0, dislikes: 0 },
+    // Add other rooms as needed
+  ]);
 
   const handleLike = (room) => {
     setLikes((prevLikes) => ({ ...prevLikes, [room]: prevLikes[room] + 1 }));
@@ -32,7 +40,7 @@ export default function App() {
       return;
     }
     // Redirect to payment page
-    window.location.href = '/payment';
+    window.location.href = './component/payment';
   };
 
   const handleBuy = (room) => {
@@ -41,12 +49,23 @@ export default function App() {
       return;
     }
     // Redirect to payment page
-    window.location.href = '/payment';
+    window.location.href = './component/payment';
   };
 
   const handleAgentInfo = () => {
     // Toggle visibility of AgentInfo section
     setAgentInfoVisible(!agentInfoVisible);
+  };
+
+  const handleBuildingAdd = (newBuilding) => {
+    // Update rooms state to include the new building
+    const newRoom = {
+      id: `room${rooms.length + 1}`, // Generate unique id
+      image: newBuilding.picture,
+      likes: 0,
+      dislikes: 0,
+    };
+    setRooms([...rooms, newRoom]);
   };
 
   return (
@@ -78,89 +97,22 @@ export default function App() {
         </div>
 
         <div className="room-box">
-          <div className="room">
-            <img src="./image2.jpg" alt="four-room apartment" />
-            <h6>Virtual tour of a four-room apartment</h6>
-            <div className="lk">
-              <button className="like-button" onClick={() => handleLike('room1')}>👍 Like ({likes.room1})</button>
-              <button className="dislike-button" onClick={() => handleDislike('room1')}>👎 Dislike ({dislikes.room1})</button>
-              <button className="buy-button" onClick={() => handleBuy('room1')}>🏡 Buy</button>
-              <button className="rent-button" onClick={() => handleRent('room1')}>🏡 Rent</button>
-              <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
+          {rooms.map(room => (
+            <div className="room" key={room.id}>
+              <img src={room.image} alt={`Room ${room.id}`} />
+              <h6>Virtual tour of {room.id}</h6>
+              <div className="lk">
+                <button className="like-button" onClick={() => handleLike(room.id)}>👍 Like ({likes[room.id]})</button>
+                <button className="dislike-button" onClick={() => handleDislike(room.id)}>👎 Dislike ({dislikes[room.id]})</button>
+                <button className="buy-button" onClick={() => handleBuy(room.id)}>🏡 Buy</button>
+                <button className="rent-button" onClick={() => handleRent(room.id)}>🏡 Rent</button>
+                <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
+              </div>
+              <button className="details">Details</button>
             </div>
-            <button className="details">Details</button>
-          </div>
-
-          <div className="room">
-            <img src="./studio.jpg" alt="studio apartment" />
-            <h6>Virtual tour of studio apartment</h6>
-            <div className="lk">
-              <button className="like-button" onClick={() => handleLike('room2')}>👍 Like ({likes.room2})</button>
-              <button className="dislike-button" onClick={() => handleDislike('room2')}>👎 Dislike ({dislikes.room2})</button>
-              <button className="buy-button" onClick={() => handleBuy('room2')}>🏡 Buy</button>
-              <button className="rent-button" onClick={() => handleRent('room2')}>🏡 Rent</button>
-              <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
-            </div>
-            <button className="details">Details</button>
-          </div>
-
-          <div className="room">
-            <img src="./appartement(6).jpg" alt="three-bedroom house" />
-            <h6>Virtual tour of a three-bedroom house</h6>
-            <div className="lk">
-              <button className="like-button" onClick={() => handleLike('room3')}>👍 Like ({likes.room3})</button>
-              <button className="dislike-button" onClick={() => handleDislike('room3')}>👎 Dislike ({dislikes.room3})</button>
-              <button className="buy-button" onClick={() => handleBuy('room3')}>🏡 Buy</button>
-              <button className="rent-button" onClick={() => handleRent('room3')}>🏡 Rent</button>
-              <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
-            </div>
-            <button className="details">Details</button>
-          </div>
-
-          <div className="room">
-            <img src="./appartement(6).jpg" alt="three-bedroom house" />
-            <h6>Virtual tour of a three-bedroom house</h6>
-            <div className="lk">
-              <button className="like-button" onClick={() => handleLike('room3')}>👍 Like ({likes.room3})</button>
-              <button className="dislike-button" onClick={() => handleDislike('room3')}>👎 Dislike ({dislikes.room3})</button>
-              <button className="buy-button" onClick={() => handleBuy('room3')}>🏡 Buy</button>
-              <button className="rent-button" onClick={() => handleRent('room3')}>🏡 Rent</button>
-              <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
-            </div>
-            <button className="details">Details</button>
-          </div>
-
-          <div className="room">
-            <img src="./appartement(6).jpg" alt="three-bedroom house" />
-            <h6>Virtual tour of a three-bedroom house</h6>
-            <div className="lk">
-              <button className="like-button" onClick={() => handleLike('room3')}>👍 Like ({likes.room3})</button>
-              <button className="dislike-button" onClick={() => handleDislike('room3')}>👎 Dislike ({dislikes.room3})</button>
-              <button className="buy-button" onClick={() => handleBuy('room3')}>🏡 Buy</button>
-              <button className="rent-button" onClick={() => handleRent('room3')}>🏡 Rent</button>
-              <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
-            </div>
-            <button className="details">Details</button>
-          </div>
-
-          <div className="room">
-            <img src="./appartement(6).jpg" alt="three-bedroom house" />
-            <h6>Virtual tour of a three-bedroom house</h6>
-            <div className="lk">
-              <button className="like-button" onClick={() => handleLike('room3')}>👍 Like ({likes.room3})</button>
-              <button className="dislike-button" onClick={() => handleDislike('room3')}>👎 Dislike ({dislikes.room3})</button>
-              <button className="buy-button" onClick={() => handleBuy('room3')}>🏡 Buy</button>
-              <button className="rent-button" onClick={() => handleRent('room3')}>🏡 Rent</button>
-              <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
-            </div>
-            <button className="details">Details</button>
-          </div>
-
-        
+          ))}
         </div>
       </div>
-
-    
 
       <hr />
 
@@ -200,77 +152,76 @@ export default function App() {
       <hr />
 
       {agentInfoVisible && (
-      <section className="wrapper">
-        <div className="paddings innerWidth flexCenter hero-container">
-          <div className="hero-left">
-            <span className="first-span">Our Agent Contacts</span><br />
-            <span className="second-span">Easy To Contact (Guest Only)</span>,<br />
-            <span className="third-span">We are always ready<br /> to assist by offering the greatest <br />services for you. We think that a nice<br /> place to live may improve your life.</span>
+        <section className="wrapper">
+          <div className="paddings innerWidth flexCenter hero-container">
+            <div className="hero-left">
+              <span className="first-span">Our Agent Contacts</span><br />
+              <span className="second-span">Easy To Contact (Guest Only)</span>,<br />
+              <span className="third-span">We are always ready<br /> to assist by offering the greatest <br />services for you. We think that a nice<br /> place to live may improve your life.</span>
 
-            <div className="c-container">
-              <div className="contactInfo">
-                <div className="box">
-                  <div className="icon"><i className="fa fa-map-marker-alt"></i></div>
-                  <div className="text">
-                    <h3>Address</h3>
-                    <p>Amatwetwegu street 33</p>
+              <div className="c-container">
+                <div className="contactInfo">
+                  <div className="box">
+                    <div className="icon"><i className="fa fa-map-marker-alt"></i></div>
+                    <div className="text">
+                      <h3>Address</h3>
+                      <p>Amatwetwegu street 33</p>
+                    </div>
                   </div>
-                </div>
-                <div className="box">
-                  <div className="icon"><i className="fa fa-phone"></i></div>
-                  <div className="text">
-                    <h3>Phone</h3>
-                    <p>0559157391</p>
+                  <div className="box">
+                    <div className="icon"><i className="fa fa-phone"></i></div>
+                    <div className="text">
+                      <h3>Phone</h3>
+                      <p>0559157391</p>
+                    </div>
                   </div>
-                </div>
-                <div className="box">
-                  <div className="icon"><i className="fa fa-envelope"></i></div>
-                  <div className="text">
-                    <h3>Email</h3>
-                    <p>bgrant001@st.ug.edu.gh</p>
+                  <div className="box">
+                    <div className="icon"><i className="fa fa-envelope"></i></div>
+                    <div className="text">
+                      <h3>Email</h3>
+                      <p>bgrant001@st.ug.edu.gh</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="centerForm">
-            <form>
-              <h2>Send A Message</h2>
-              <div className="inputBox">
-                <input type="text" name="name" required />
-                <span>Full Name</span>
-              </div>
-              <div className="inputBox">
-                <input type="email" name="email" required />
-                <span>Email</span>
-              </div>
-              <div className="inputBox">
-                <textarea required></textarea>
-                <span>Type Your Message....</span>
-              </div>
-              <div className="inputBox">
-                <input type="submit" value="Send" />
-              </div>
-            </form>
-          </div>
+            <div className="centerForm">
+              <form>
+                <h2>Send A Message</h2>
+                <div className="inputBox">
+                  <input type="text" name="name" required />
+                  <span>Full Name</span>
+                </div>
+                <div className="inputBox">
+                  <input type="email" name="email" required />
+                  <span>Email</span>
+                </div>
+                <div className="inputBox">
+                  <textarea required></textarea>
+                  <span>Type Your Message....</span>
+                </div>
+                <div className="inputBox">
+                  <input type="submit" value="Send" />
+                </div>
+              </form>
+            </div>
 
-          <div className="hero-right">
-            <div className="image-container">
-              <img src="./agent.jpg" alt="" />
+            <div className="hero-right">
+              <div className="image-container">
+                <img src="./nice.png" alt="" />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
-
-      <div className="footer">
+      <footer className="footer">
         <div className="social">
-          <i className="fa fa-facebook"></i>
-          <i className="fa fa-instagram"></i>
-          <i className="fa fa-twitter"></i>
-          <i className="fa fa-snapchat"></i>
+          <i className="fa-brands fa-facebook"></i>
+          <i className="fa-brands fa-square-instagram"></i>
+          <i className="fa-brands fa-square-twitter"></i>
+          <i className="fa-brands fa-square-snapchat"></i>
         </div>
 
         <div className="container-f">
@@ -283,33 +234,25 @@ export default function App() {
           </div>
 
           <div className="col">
-            <h3>Our Services</h3>
-            <p>Security</p>
-            <p>Privacy Policy</p>
-            <p>Privacy</p>
-            <p>Agreement</p>
-          </div>
-
-          <div className="col">
-            <h3>Details</h3>
+            <h3>Company</h3>
+            <p>Company</p>
+            <p>Details</p>
+            <p>Planning</p>
             <p>About Us</p>
-            <p>Project</p>
-            <p>Team</p>
-            <p>Contact Us</p>
           </div>
 
           <div className="col">
-            <h3>Locations</h3>
-            <p>Stay Safe</p>
-            <p>Location</p>
-            <p>More Locations</p>
-            <p>More Safety</p>
+            <h3>Information</h3>
+            <p>Company</p>
+            <p>Details</p>
+            <p>Planning</p>
+            <p>About Us</p>
           </div>
         </div>
+      </footer>
 
-        <div className="clearfix"></div>
-        <p className="text-center">Inclusively<br />2024  All rights reserved | |</p>
-      </div>
+      {/* Render OwnerDashboard component */}
+      {isLoggedIn && <OwnerDashboard onBuildingAdd={handleBuildingAdd} />}
     </>
   );
 }
