@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import OwnerDashboard from './OwnerDashboard'; // Import OwnerDashboard component
 
 export default function App() {
   const [likes, setLikes] = useState({
@@ -26,12 +25,15 @@ export default function App() {
     // Add other rooms as needed
   ]);
 
+  const [newBuilding, setNewBuilding] = useState({ picture: '', price: '', location: '' });
+  const [newAgent, setNewAgent] = useState({ name: '', email: '', phone: '', address: '' });
+
   const handleLike = (room) => {
-    setLikes((prevLikes) => ({ ...prevLikes, [room]: prevLikes[room] + 1 }));
+    setLikes((prevLikes) => ({...prevLikes, [room]: prevLikes[room] + 1 }));
   };
 
   const handleDislike = (room) => {
-    setDislikes((prevDislikes) => ({ ...prevDislikes, [room]: prevDislikes[room] + 1 }));
+    setDislikes((prevDislikes) => ({...prevDislikes, [room]: prevDislikes[room] + 1 }));
   };
 
   const handleRent = (room) => {
@@ -57,7 +59,7 @@ export default function App() {
     setAgentInfoVisible(!agentInfoVisible);
   };
 
-  const handleBuildingAdd = (newBuilding) => {
+  const handleBuildingAdd = () => {
     // Update rooms state to include the new building
     const newRoom = {
       id: `room${rooms.length + 1}`, // Generate unique id
@@ -66,7 +68,25 @@ export default function App() {
       dislikes: 0,
     };
     setRooms([...rooms, newRoom]);
+    setNewBuilding({ picture: '', price: '', location: '' }); // Reset newBuilding state
   };
+
+  const handleAgentAdd = () => {
+    // Update agents state to include the new agent
+    setAgents([...agents, newAgent.name]);
+    setNewAgent({ name: '', email: '', phone: '', address: '' }); // Reset newAgent state
+  };
+
+  const handleBuildingChange = (event) => {
+    const { name, value } = event.target;
+    setNewBuilding({...newBuilding, [name]: value });
+  };
+
+  const handleAgentChange = (event) => {
+    const { name, value } = event.target;
+    setNewAgent({...newAgent, [name]: value });
+  };
+
 
   return (
     <>
@@ -216,7 +236,7 @@ export default function App() {
         </section>
       )}
 
-      <footer className="footer">
+<div className="footer">
         <div className="social">
           <i className="fa-brands fa-facebook"></i>
           <i className="fa-brands fa-square-instagram"></i>
@@ -249,10 +269,10 @@ export default function App() {
             <p>About Us</p>
           </div>
         </div>
-      </footer>
+      </div>
 
-      {/* Render OwnerDashboard component */}
-      {isLoggedIn && <OwnerDashboard onBuildingAdd={handleBuildingAdd} />}
+
+
     </>
   );
 }

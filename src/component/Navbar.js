@@ -10,7 +10,7 @@ return (
          <CustomLink href="/home"><i class="fa-solid fa-house"></i>Home</CustomLink>
         <CustomLink href="/login"><i class="fa-solid fa-right-to-bracket"></i>Login</CustomLink>
         <CustomLink href="/signup"><i class="fa-solid fa-user-plus"></i>SignUp</CustomLink>
-        <CustomLink href="/payment"><i class="fa-regular fa-user"></i>Payment</CustomLink>
+        <CustomLink href="/OwnerDashboard"><i class="fa-regular fa-user"></i>OwnerDashboard</CustomLink>
       <CustomLink href="/about"><i class="fa-solid fa-address-card"></i>About</CustomLink>
      </ul>
      <div className="search-bar">

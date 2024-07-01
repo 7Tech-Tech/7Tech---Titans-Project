@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OwnerDashboard from './OwnerDashboard'; // Adjust path as per your project structure
 
 export default function LoginForm() {
   const [userType, setUserType] = useState('user'); // Default to 'user' type
@@ -145,12 +146,12 @@ export default function LoginForm() {
         </div>
       );
     } else if (userType === 'owner') {
-      return (
-        <div>
-          <h1>Owner Dashboard</h1>
-          {/* Your Owner dashboard or page */}
-        </div>
-      );
+      // Check if an owner exists to allow access to OwnerDashboard
+      if (ownerExists) {
+        return <OwnerDashboard />;
+      } else {
+        return <h1>You are not permitted to access this page.</h1>;
+      }
     }
   }
 
@@ -159,7 +160,6 @@ export default function LoginForm() {
     <>
       <section className="back">
         <img src="./woood.jpg" alt="" />
-
         <div className="heros-container">
           <div className="form-left">
             <form onSubmit={handleSubmit}>
