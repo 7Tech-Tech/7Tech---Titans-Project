@@ -954,6 +954,12 @@ body {
 /* Owner Dashboard */
 
 .owner-dashboard {
+  
+    background-color: #444343;
+    background-size: cover;
+    background-position: center;
+    
+  
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -1029,4 +1035,32 @@ button:hover:not(:disabled) {
   margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+
+.uploaded-buildings-container {
+  margin-top: 20px;
+}
+
+.buildings-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.building-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.building-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.building-card p {
+  margin: 5px 0;
 }

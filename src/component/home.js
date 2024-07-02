@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import OwnerDashboard from './OwnerDashboard'; // Adjust path if necessary
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [agentInfoVisible, setAgentInfoVisible] = useState(false);
   const [rooms, setRooms] = useState([
     { id: 'room1', image: './image1.jpg', likes: 0, dislikes: 0 },
     { id: 'room2', image: './image2.jpg', likes: 0, dislikes: 0 },
     { id: 'room3', image: './image3.jpg', likes: 0, dislikes: 0 },
-    // Add other rooms as needed
   ]);
 
   const [agents, setAgents] = useState([
@@ -15,8 +14,8 @@ export default function App() {
     { name: 'Agent 2', email: '', phone: '', address: '' },
     { name: 'Agent 3', email: '', phone: '', address: '' }
   ]);
-  const [newBuilding, setNewBuilding] = useState({ picture: '', price: '', location: '' });
-  const [newAgent, setNewAgent] = useState({ name: '', email: '', phone: '', address: '' });
+
+  const [agentInfoVisible, setAgentInfoVisible] = useState(false);
 
   const handleLike = (roomId) => {
     setRooms(rooms.map(room => 
@@ -48,6 +47,22 @@ export default function App() {
 
   const handleAgentInfo = () => {
     setAgentInfoVisible(!agentInfoVisible);
+  };
+
+  const handleBuildingAdd = (newBuilding) => {
+    setRooms([...rooms, newBuilding]);
+  };
+
+  const handleBuildingDelete = (buildingId) => {
+    setRooms(rooms.filter(room => room.id !== buildingId));
+  };
+
+  const handleAgentAdd = (newAgent) => {
+    setAgents([...agents, newAgent]);
+  };
+
+  const handleAgentDelete = (agentName) => {
+    setAgents(agents.filter(agent => agent.name !== agentName));
   };
 
   return (
@@ -143,27 +158,17 @@ export default function App() {
 
               <div className="c-container">
                 <div className="contactInfo">
-                  <div className="box">
-                    <div className="icon"><i className="fa fa-map-marker-alt"></i></div>
-                    <div className="text">
-                      <h3>Address</h3>
-                      <p>Amatwetwegu street 33</p>
+                  {agents.map(agent => (
+                    <div className="box" key={agent.name}>
+                      <div className="icon"><i className="fa fa-user"></i></div>
+                      <div className="text">
+                        <h3>{agent.name}</h3>
+                        <p>{agent.email}</p>
+                        <p>{agent.phone}</p>
+                        <p>{agent.address}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="box">
-                    <div className="icon"><i className="fa fa-phone"></i></div>
-                    <div className="text">
-                      <h3>Phone</h3>
-                      <p>0559157391</p>
-                    </div>
-                  </div>
-                  <div className="box">
-                    <div className="icon"><i className="fa fa-envelope"></i></div>
-                    <div className="text">
-                      <h3>Email</h3>
-                      <p>bgrant001@st.ug.edu.gh</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -198,6 +203,14 @@ export default function App() {
         </section>
       )}
 
+      <OwnerDashboard
+        onBuildingAdd={handleBuildingAdd}
+        onBuildingDelete={handleBuildingDelete}
+        onAgentAdd={handleAgentAdd}
+        onAgentDelete={handleAgentDelete}
+        agents={agents}
+      />
+
       <div className="footer">
         <div className="social">
           <i className="fa-brands fa-facebook"></i>
@@ -224,13 +237,16 @@ export default function App() {
           </div>
 
           <div className="col">
-            <h3>Information</h3>
+            <h3>Company</h3>
             <p>Company</p>
             <p>Details</p>
             <p>Planning</p>
             <p>About Us</p>
           </div>
         </div>
+
+        <hr />
+        <h5>All Rights Reserved &copy; 2022</h5>
       </div>
     </>
   );
