@@ -8,27 +8,22 @@ export default function OwnerDashboard({
   onAgentAdd,
   onAgentDelete
 }) {
-  const [newBuilding, setNewBuilding] = useState({ id: '', image: '', likes: 0, dislikes: 0 });
+  const [newBuilding, setNewBuilding] = useState({ image: '', price: '', location: '' });
   const [newAgent, setNewAgent] = useState({ name: '', email: '', phone: '', address: '' });
   const [buildingPicture, setBuildingPicture] = useState('');
-  const [price, setPrice] = useState('');
-  const [location, setLocation] = useState('');
   const [selectedBuilding, setSelectedBuilding] = useState('');
   const [selectedAgent, setSelectedAgent] = useState('');
 
   const handleBuildingSubmit = (e) => {
     e.preventDefault();
     const newBuildingData = {
-      ...newBuilding,
       image: buildingPicture,
-      price,
-      location,
+      price: newBuilding.price,
+      location: newBuilding.location
     };
     onBuildingAdd(newBuildingData);
-    setNewBuilding({ id: '', image: '', likes: 0, dislikes: 0 });
+    setNewBuilding({ image: '', price: '', location: '' });
     setBuildingPicture('');
-    setPrice('');
-    setLocation('');
   };
 
   const handlePictureChange = (e) => {
@@ -44,8 +39,10 @@ export default function OwnerDashboard({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'price') setPrice(value);
-    if (name === 'location') setLocation(value);
+    setNewBuilding({
+      ...newBuilding,
+      [name]: value
+    });
   };
 
   const handleBuildingSelect = (e) => {
@@ -53,8 +50,10 @@ export default function OwnerDashboard({
   };
 
   const handleDeleteBuilding = () => {
-    onBuildingDelete(selectedBuilding);
-    setSelectedBuilding('');
+    if (selectedBuilding) {
+      onBuildingDelete(selectedBuilding);
+      setSelectedBuilding('');
+    }
   };
 
   const handleAgentSelectChange = (e) => {
@@ -62,8 +61,10 @@ export default function OwnerDashboard({
   };
 
   const handleDeleteAgent = () => {
-    onAgentDelete(selectedAgent);
-    setSelectedAgent('');
+    if (selectedAgent) {
+      onAgentDelete(selectedAgent);
+      setSelectedAgent('');
+    }
   };
 
   const handleAgentChange = (e) => {
@@ -77,6 +78,8 @@ export default function OwnerDashboard({
   };
 
   return (
+    <body>
+      
     <section className="owner-dashboard">
       <h1>Owner Dashboard</h1>
 
@@ -89,11 +92,11 @@ export default function OwnerDashboard({
         </div>
         <div className="form-section">
           <label htmlFor="price">Price</label>
-          <input type="text" id="price" name="price" value={price} onChange={handleInputChange} aria-label="Price" />
+          <input type="text" id="price" name="price" value={newBuilding.price} onChange={handleInputChange} aria-label="Price" />
         </div>
         <div className="form-section">
           <label htmlFor="location">Location</label>
-          <input type="text" id="location" name="location" value={location} onChange={handleInputChange} aria-label="Location" />
+          <input type="text" id="location" name="location" value={newBuilding.location} onChange={handleInputChange} aria-label="Location" />
         </div>
         <button type="submit" aria-label="Save Building Details">Save Building Details</button>
       </form>
@@ -191,5 +194,13 @@ export default function OwnerDashboard({
         </div>
       </form>
     </section>
+    </body>
+
+
+
+
+
+
+
   );
 }

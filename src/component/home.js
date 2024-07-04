@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import OwnerDashboard from './OwnerDashboard'; // Adjust path if necessary
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,7 +9,7 @@ export default function App() {
   ]);
 
   const [agents, setAgents] = useState([
-    { name: 'Agent 1', email: '', phone: '', address: '' },
+    { name: 'Grant', email: 'bgrant001@st.ug.edu.gh', phone: '0559157391', address: 'amatwetwegue' },
     { name: 'Agent 2', email: '', phone: '', address: '' },
     { name: 'Agent 3', email: '', phone: '', address: '' }
   ]);
@@ -105,7 +104,6 @@ export default function App() {
                 <button className="rent-button" onClick={() => handleRent(room.id)}>🏡 Rent</button>
                 <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
               </div>
-              <button className="details">Details</button>
             </div>
           ))}
         </div>
@@ -153,7 +151,7 @@ export default function App() {
           <div className="paddings innerWidth flexCenter hero-container">
             <div className="hero-left">
               <span className="first-span">Our Agent Contacts</span><br />
-              <span className="second-span">Easy To Contact (Guest Only)</span>,<br />
+              <span className="second-span">Easy To Contact (Guest Only)</span><br />
               <span className="third-span">We are always ready<br /> to assist by offering the greatest <br />services for you. We think that a nice<br /> place to live may improve your life.</span>
 
               <div className="c-container">
@@ -202,14 +200,6 @@ export default function App() {
           </div>
         </section>
       )}
-
-      <OwnerDashboard
-        onBuildingAdd={handleBuildingAdd}
-        onBuildingDelete={handleBuildingDelete}
-        onAgentAdd={handleAgentAdd}
-        onAgentDelete={handleAgentDelete}
-        agents={agents}
-      />
 
       <div className="footer">
         <div className="social">

@@ -3,7 +3,7 @@ import React from 'react';
 
 import Home from "./component/home";
 import Login from "./component/login";
-import SignUp from "./component/signup";
+import Payment from "./component/payment";
 import OwnerDashboard from "./component/OwnerDashboard";
 import About from "./component/about";
 
@@ -27,8 +27,8 @@ import Navbar from "./component/Navbar";
       case "/login":
       component = <Login />
       break;
-      case "/signup":
-      component = <SignUp />
+      case "/payment":
+      component = <Payment />
       break;
       case "/OwnerDashboard":
       component = <OwnerDashboard />
