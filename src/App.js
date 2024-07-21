@@ -2,6 +2,7 @@ import React from 'react';
 
 
 import Home from "./component/home";
+import GuestHome from "./component/guesthome";
 import Login from "./component/login";
 import Payment from "./component/payment";
 import OwnerDashboard from "./component/OwnerDashboard";
@@ -23,6 +24,9 @@ import Navbar from "./component/Navbar";
     
      case "/home":
       component = <Home />
+      break;
+      case "/guesthome":
+      component = <GuestHome />
       break;
       case "/login":
       component = <Login />

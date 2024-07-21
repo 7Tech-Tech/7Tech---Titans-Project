@@ -30,6 +30,7 @@ export default function Navbar() {
     <nav className="nav">
       <img src="./logo.jpg" alt="Logo" />
       <ul>
+        <CustomLink href="/guesthome"><i className="fa-solid fa-house"></i>GuestHome</CustomLink>
         <CustomLink href="/home"><i className="fa-solid fa-house"></i>Home</CustomLink>
         <CustomLink href="/login"><i className="fa-solid fa-right-to-bracket"></i>Login</CustomLink>
         <CustomLink href="/payment"><i className="fa-solid fa-user-plus"></i>Payment</CustomLink>
