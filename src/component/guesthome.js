@@ -8,14 +8,6 @@ export default function App() {
     { id: 'room3', image: './image3.jpg', likes: 0, dislikes: 0 },
   ]);
 
-  const [agents, setAgents] = useState([
-    { name: 'Grant', email: 'bgrant001@st.ug.edu.gh', phone: '0559157391', address: 'amatwetwegue' },
-    { name: 'Agent 2', email: '', phone: '', address: '' },
-    { name: 'Agent 3', email: '', phone: '', address: '' }
-  ]);
-
-  const [agentInfoVisible, setAgentInfoVisible] = useState(false);
-
   const handleLike = (roomId) => {
     setRooms(rooms.map(room => 
       room.id === roomId ? { ...room, likes: room.likes + 1 } : room
@@ -33,7 +25,7 @@ export default function App() {
       alert('Please log in first');
       return;
     }
-    window.location.href = './component/payment';
+    window.location.href = './component/home';
   };
 
   const handleBuy = () => {
@@ -41,28 +33,14 @@ export default function App() {
       alert('Please log in first');
       return;
     }
-    window.location.href = './component/payment';
+    window.location.href = './component/home';
   };
 
-  const handleAgentInfo = () => {
-    setAgentInfoVisible(!agentInfoVisible);
-  };
-
-  const handleBuildingAdd = (newBuilding) => {
-    setRooms([...rooms, newBuilding]);
-  };
-
-  const handleBuildingDelete = (buildingId) => {
-    setRooms(rooms.filter(room => room.id !== buildingId));
-  };
-
-  const handleAgentAdd = (newAgent) => {
-    setAgents([...agents, newAgent]);
-  };
-
-  const handleAgentDelete = (agentName) => {
-    setAgents(agents.filter(agent => agent.name !== agentName));
-  };
+  if (isLoggedIn) {
+    // Redirect logged-in users or show a message
+    window.location.href = './component/home'; // Example redirect
+    return null; // Alternatively, return a message or another component
+  }
 
   return (
     <>
@@ -102,7 +80,6 @@ export default function App() {
                 <button className="dislike-button" onClick={() => handleDislike(room.id)}>👎 Dislike ({room.dislikes})</button>
                 <button className="buy-button" onClick={() => handleBuy(room.id)}>🏡 Buy</button>
                 <button className="rent-button" onClick={() => handleRent(room.id)}>🏡 Rent</button>
-                <button className="agent" onClick={handleAgentInfo}> AgentInfo </button>
               </div>
             </div>
           ))}
@@ -145,61 +122,6 @@ export default function App() {
       </div>
 
       <hr />
-
-      {agentInfoVisible && (
-        <section className="wrapper">
-          <div className="paddings innerWidth flexCenter hero-container">
-            <div className="hero-left">
-              <span className="first-span">Our Agent Contacts</span><br />
-              <span className="second-span">Easy To Contact (Guest Only)</span><br />
-              <span className="third-span">We are always ready<br /> to assist by offering the greatest <br />services for you. We think that a nice<br /> place to live may improve your life.</span>
-
-              <div className="c-container">
-                <div className="contactInfo">
-                  {agents.map(agent => (
-                    <div className="box" key={agent.name}>
-                      <div className="icon"><i className="fa fa-user"></i></div>
-                      <div className="text">
-                        <h3>{agent.name}</h3>
-                        <p>{agent.email}</p>
-                        <p>{agent.phone}</p>
-                        <p>{agent.address}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="centerForm">
-              <form>
-                <h2>Send A Message</h2>
-                <div className="inputBox">
-                  <input type="text" name="name" required />
-                  <span>Full Name</span>
-                </div>
-                <div className="inputBox">
-                  <input type="email" name="email" required />
-                  <span>Email</span>
-                </div>
-                <div className="inputBox">
-                  <textarea required></textarea>
-                  <span>Type Your Message....</span>
-                </div>
-                <div className="inputBox">
-                  <input type="submit" value="Send" />
-                </div>
-              </form>
-            </div>
-
-            <div className="hero-right">
-              <div className="image-container">
-                <img src="./nice.png" alt="" />
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       <div className="footer">
         <div className="social">

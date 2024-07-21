@@ -10,10 +10,18 @@ export default function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Simulate login logic
-    // Here you would typically send a request to your backend for authentication
-    // For demo purposes, we're using a simulated login logic
     if (userType === 'user' || userType === 'owner') {
+      if (userType === 'owner' && ownerExists) {
+        alert('An owner already exists. Only one owner is allowed.');
+        return;
+      }
       setLoggedIn(true);
+      // Redirect based on user type
+      if (userType === 'owner') {
+        window.location.href = '/owner-dashboard'; // Redirect to OwnerDashboard
+      } else {
+        window.location.href = '/home'; // Redirect to Home page for users
+      }
     }
   };
 
@@ -28,17 +36,21 @@ export default function LoginForm() {
   const handleSignUpSubmit = (event) => {
     event.preventDefault();
     // Simulate sign-up logic
-    // Here you would typically send a request to your backend to create a new account
-    // For demo purposes, we're using a simulated signup logic
     if (userType === 'owner') {
       if (ownerExists) {
         alert('An owner already exists. Only one owner is allowed.');
         return;
       } else {
-        setOwnerExists(true);
+        setOwnerExists(true); // Allow sign up and mark owner as existing
       }
     }
     setShowSignUp(false);
+    // Redirect based on user type
+    if (userType === 'owner') {
+      window.location.href = '/owner-dashboard'; // Redirect to OwnerDashboard
+    } else {
+      window.location.href = '/home'; // Redirect to Home page for users
+    }
   };
 
   if (showSignUp) {

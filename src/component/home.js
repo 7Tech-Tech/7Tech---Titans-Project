@@ -1,20 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Ensure you have axios installed or use fetch API
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [rooms, setRooms] = useState([
-    { id: 'room1', image: './image1.jpg', likes: 0, dislikes: 0 },
-    { id: 'room2', image: './image2.jpg', likes: 0, dislikes: 0 },
-    { id: 'room3', image: './image3.jpg', likes: 0, dislikes: 0 },
-  ]);
-
-  const [agents, setAgents] = useState([
-    { name: 'Grant', email: 'bgrant001@st.ug.edu.gh', phone: '0559157391', address: 'amatwetwegue' },
-    { name: 'Agent 2', email: '', phone: '', address: '' },
-    { name: 'Agent 3', email: '', phone: '', address: '' }
-  ]);
-
+  const [userName, setUserName] = useState('');
+  const [rooms, setRooms] = useState([]);
+  const [agents, setAgents] = useState([]);
   const [agentInfoVisible, setAgentInfoVisible] = useState(false);
+
+  /*useEffect(() => {
+    // Check login status and user name on component mount
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const name = localStorage.getItem('userName') || '';
+
+    if (!loggedIn) {
+      window.location.href = './guesthome'; // Redirect to GuestHome if not logged in
+    } else {
+      setIsLoggedIn(true);
+      setUserName(name);
+    }
+
+    // Fetch room data from API
+    axios.get('/api/rooms') // Replace with your actual API endpoint
+      .then(response => {
+        setRooms(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching rooms:', error);
+      });
+
+    // Fetch agent data from API
+    axios.get('/api/agents') // Replace with your actual API endpoint
+      .then(response => {
+        setAgents(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching agents:', error);
+      });
+
+  }, []);*/
 
   const handleLike = (roomId) => {
     setRooms(rooms.map(room => 
@@ -29,19 +53,11 @@ export default function App() {
   };
 
   const handleRent = () => {
-    if (!isLoggedIn) {
-      alert('Please log in first');
-      return;
-    }
-    window.location.href = './component/payment';
+    window.location.href = './payment'; // Redirect to payment page
   };
 
   const handleBuy = () => {
-    if (!isLoggedIn) {
-      alert('Please log in first');
-      return;
-    }
-    window.location.href = './component/payment';
+    window.location.href = './payment'; // Redirect to payment page
   };
 
   const handleAgentInfo = () => {
@@ -49,6 +65,7 @@ export default function App() {
   };
 
   const handleBuildingAdd = (newBuilding) => {
+    // Assuming newBuilding is in the correct format
     setRooms([...rooms, newBuilding]);
   };
 
@@ -64,11 +81,21 @@ export default function App() {
     setAgents(agents.filter(agent => agent.name !== agentName));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userName');
+    setIsLoggedIn(false);
+    setUserName('');
+    window.location.href = './guesthome'; // Redirect to GuestHome on logout
+  };
+
   return (
     <>
       <div className="video-container">
         <video src="./video 1.mp4" autoPlay loop muted />
-        <h1>WELCOME TO 7<br />TECH TITANS ESTATE</h1>
+        <h1>
+          {isLoggedIn ? `Welcome, ${userName}` : ''}
+        </h1>
         <h2>How Will You Like Us To Serve You</h2>
         <p>Grab One Building</p>
       </div>
@@ -112,36 +139,7 @@ export default function App() {
       <hr />
 
       <div className="icons">
-        <div className="icon">
-          <button><i className="fa fa-home" aria-hidden="true"></i> Enter House</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-sitemap" aria-hidden="true"></i> Site Map</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-bed" aria-hidden="true"></i> Bed</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-product-hunt" aria-hidden="true"></i> Car Park Free</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-bath" aria-hidden="true"></i> Hot Tub</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-street-view" aria-hidden="true"></i> Street View</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-eye" aria-hidden="true"></i> Vision</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-users" aria-hidden="true"></i> Family Room</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-air-conditioner" aria-hidden="true"></i> Air Condition</button>
-        </div>
-        <div className="icon">
-          <button><i className="fa fa-wifi" aria-hidden="true"></i> Free Wifi</button>
-        </div>
+        {/* Your icons code here */}
       </div>
 
       <hr />
@@ -201,7 +199,7 @@ export default function App() {
         </section>
       )}
 
-      <div className="footer">
+<div className="footer">
         <div className="social">
           <i className="fa-brands fa-facebook"></i>
           <i className="fa-brands fa-square-instagram"></i>
