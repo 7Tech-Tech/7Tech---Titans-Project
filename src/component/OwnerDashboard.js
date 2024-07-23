@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 export default function OwnerDashboard({
   rooms = [],
@@ -14,16 +15,21 @@ export default function OwnerDashboard({
   const [selectedBuilding, setSelectedBuilding] = useState('');
   const [selectedAgent, setSelectedAgent] = useState('');
 
-  const handleBuildingSubmit = (e) => {
+  const handleBuildingSubmit = async (e) => {
     e.preventDefault();
     const newBuildingData = {
       image: buildingPicture,
       price: newBuilding.price,
       location: newBuilding.location
     };
-    onBuildingAdd(newBuildingData);
-    setNewBuilding({ image: '', price: '', location: '' });
-    setBuildingPicture('');
+    try {
+      const response = await axios.post('/api/buildings', newBuildingData); // Replace with your backend API URL
+      onBuildingAdd(response.data);
+      setNewBuilding({ image: '', price: '', location: '' });
+      setBuildingPicture('');
+    } catch (error) {
+      console.error('Error adding building:', error);
+    }
   };
 
   const handlePictureChange = (e) => {
@@ -49,10 +55,15 @@ export default function OwnerDashboard({
     setSelectedBuilding(e.target.value);
   };
 
-  const handleDeleteBuilding = () => {
+  const handleDeleteBuilding = async () => {
     if (selectedBuilding) {
-      onBuildingDelete(selectedBuilding);
-      setSelectedBuilding('');
+      try {
+        await axios.delete(`/api/buildings/${selectedBuilding}`); // Replace with your backend API URL
+        onBuildingDelete(selectedBuilding);
+        setSelectedBuilding('');
+      } catch (error) {
+        console.error('Error deleting building:', error);
+      }
     }
   };
 
@@ -60,10 +71,15 @@ export default function OwnerDashboard({
     setSelectedAgent(e.target.value);
   };
 
-  const handleDeleteAgent = () => {
+  const handleDeleteAgent = async () => {
     if (selectedAgent) {
-      onAgentDelete(selectedAgent);
-      setSelectedAgent('');
+      try {
+        await axios.delete(`/api/agents/${selectedAgent}`); // Replace with your backend API URL
+        onAgentDelete(selectedAgent);
+        setSelectedAgent('');
+      } catch (error) {
+        console.error('Error deleting agent:', error);
+      }
     }
   };
 
@@ -72,14 +88,17 @@ export default function OwnerDashboard({
     setNewAgent({ ...newAgent, [name]: value });
   };
 
-  const handleAddAgent = () => {
-    onAgentAdd(newAgent);
-    setNewAgent({ name: '', email: '', phone: '', address: '' });
+  const handleAddAgent = async () => {
+    try {
+      const response = await axios.post('/api/agents', newAgent); // Replace with your backend API URL
+      onAgentAdd(response.data);
+      setNewAgent({ name: '', email: '', phone: '', address: '' });
+    } catch (error) {
+      console.error('Error adding agent:', error);
+    }
   };
 
   return (
-    <body>
-      
     <section className="owner-dashboard">
       <h1>Owner Dashboard</h1>
 
@@ -194,13 +213,5 @@ export default function OwnerDashboard({
         </div>
       </form>
     </section>
-    </body>
-
-
-
-
-
-
-
   );
 }

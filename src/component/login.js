@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import OwnerDashboard from './OwnerDashboard'; // Adjust path as per your project structure
 
 export default function LoginForm() {
   const [userType, setUserType] = useState('user'); // Default to 'user' type
@@ -18,9 +17,9 @@ export default function LoginForm() {
       setLoggedIn(true);
       // Redirect based on user type
       if (userType === 'owner') {
-        window.location.href = '/owner-dashboard'; // Redirect to OwnerDashboard
+        window.location.href = './OwnerDashboard'; // Redirect to OwnerDashboard
       } else {
-        window.location.href = '/home'; // Redirect to Home page for users
+        window.location.href = './home'; // Redirect to Home page for users
       }
     }
   };
@@ -47,9 +46,9 @@ export default function LoginForm() {
     setShowSignUp(false);
     // Redirect based on user type
     if (userType === 'owner') {
-      window.location.href = '/owner-dashboard'; // Redirect to OwnerDashboard
+      window.location.href = './OwnerDashboard'; // Redirect to OwnerDashboard
     } else {
-      window.location.href = '/home'; // Redirect to Home page for users
+      window.location.href = './home'; // Redirect to Home page for users
     }
   };
 
@@ -149,23 +148,6 @@ export default function LoginForm() {
     );
   }
 
-  if (loggedIn) {
-    if (userType === 'user') {
-      return (
-        <div>
-          <h1>User Dashboard</h1>
-          {/* Your User dashboard or page */}
-        </div>
-      );
-    } else if (userType === 'owner') {
-      // Check if an owner exists to allow access to OwnerDashboard
-      if (ownerExists) {
-        return <OwnerDashboard />;
-      } else {
-        return <h1>You are not permitted to access this page.</h1>;
-      }
-    }
-  }
 
   // Default login form
   return (

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-export default function Payment() {
+export default function Payment({ paymentType }) { // Assume paymentType is passed from the Home page
   const [momoSelected, setMomoSelected] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [receipt, setReceipt] = useState(null);
 
   const handleMomoChange = (event) => {
     const selectedMomo = event.target.value;
@@ -18,8 +20,37 @@ export default function Payment() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Set payment success
+    setPaymentSuccess(true);
+
+    // Generate receipt data
+    const now = new Date();
+    const receiptData = {
+      typeOfPayment: momoSelected ? 'Mobile Money' : 'Credit Card',
+      date: now.toLocaleDateString(),
+      time: now.toLocaleTimeString(),
+      paymentType: paymentType // Rent or Buy from the Home page
+    };
+    setReceipt(receiptData);
+
     // Handle form submission logic here (e.g., sending data to server)
     console.log('Form submitted!');
+  };
+
+  const handlePrintReceipt = () => {
+    if (receipt) {
+      const receiptWindow = window.open('', '', 'width=600,height=400');
+      receiptWindow.document.write('<html><head><title>Receipt</title></head><body>');
+      receiptWindow.document.write(`<h1>Payment Receipt</h1>`);
+      receiptWindow.document.write(`<p><strong>Type of Payment:</strong> ${receipt.typeOfPayment}</p>`);
+      receiptWindow.document.write(`<p><strong>Date:</strong> ${receipt.date}</p>`);
+      receiptWindow.document.write(`<p><strong>Time:</strong> ${receipt.time}</p>`);
+      receiptWindow.document.write(`<p><strong>Payment Type:</strong> ${receipt.paymentType}</p>`);
+      receiptWindow.document.write('</body></html>');
+      receiptWindow.document.close();
+      receiptWindow.print();
+    }
   };
 
   return (
@@ -123,6 +154,15 @@ export default function Payment() {
             Submit Payment
           </button>
         </form>
+
+        {paymentSuccess && (
+          <div className="payment-success">
+            <h3>Payment Successful!</h3>
+            <button onClick={handlePrintReceipt} className="print-receipt-button">
+              Print Receipt
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
