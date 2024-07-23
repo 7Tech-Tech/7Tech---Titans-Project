@@ -1,21 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Navbar() {
-  const [loggedIn, setLoggedIn] = useState(false); // Assume a user is not logged in initially
-  const [userType, setUserType] = useState(''); // Track the user type
-  const [userInfo, setUserInfo] = useState(null); // Track user information
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userType, setUserType] = useState('');
+  const [userInfo, setUserInfo] = useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn) {
+      const storedUserType = localStorage.getItem('userType');
+      const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+      setUserType(storedUserType);
+      setUserInfo(storedUserInfo);
+      setLoggedIn(true);
+    }
+  }, []);
 
   const handleLogin = (type, info) => {
     setUserType(type);
     setUserInfo(info);
     setLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userType', type);
+    localStorage.setItem('userInfo', JSON.stringify(info));
+    if (type === 'guest') {
+      window.location.href = './home'; // Redirect guest to home after login/signup
+    } else {
+      window.location.href = './OwnerDashboard'; // Redirect owner to their dashboard
+    }
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userType');
+    localStorage.removeItem('userInfo');
     setLoggedIn(false);
     setUserInfo(null);
-    setShowProfileDropdown(false); // Close dropdown on logout
+    setUserType('');
+    setShowProfileDropdown(false);
+    window.location.href = './guesthome'; // Redirect to GuestHome on logout
   };
 
   const handleProfileClick = () => {
@@ -30,11 +54,10 @@ export default function Navbar() {
     <nav className="nav">
       <img src="./logo.jpg" alt="Logo" />
       <ul>
-        <CustomLink href="/guesthome"><i className="fa-solid fa-house"></i>GuestHome</CustomLink>
-        <CustomLink href="/home"><i className="fa-solid fa-house"></i>Home</CustomLink>
-        <CustomLink href="/login"><i className="fa-solid fa-right-to-bracket"></i>Login</CustomLink>
-        <CustomLink href="/payment"><i className="fa-solid fa-user-plus"></i>Payment</CustomLink>
-        <CustomLink href="/OwnerDashboard"><i className="fa-regular fa-user"></i>OwnerDashboard</CustomLink>
+        {!loggedIn && <CustomLink href="/guesthome"><i className="fa-solid fa-house"></i>GuestHome</CustomLink>}
+        {loggedIn && <CustomLink href="/home"><i className="fa-solid fa-house"></i>Home</CustomLink>}
+        {!loggedIn && <CustomLink href="/login"><i className="fa-solid fa-right-to-bracket"></i>Login</CustomLink>}
+        {userType === 'owner' && <CustomLink href="/OwnerDashboard"><i className="fa-regular fa-user"></i>OwnerDashboard</CustomLink>}
         <CustomLink href="/about"><i className="fa-solid fa-address-card"></i>About</CustomLink>
       </ul>
       <div className="search-bar">
