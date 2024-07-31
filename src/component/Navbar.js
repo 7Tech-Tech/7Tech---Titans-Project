@@ -6,7 +6,7 @@ export default function Navbar() {
   const [userInfo, setUserInfo] = useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn) {
       const storedUserType = localStorage.getItem('userType');
@@ -29,7 +29,7 @@ export default function Navbar() {
     } else {
       window.location.href = './OwnerDashboard'; // Redirect owner to their dashboard
     }
-  };
+  };*/
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
